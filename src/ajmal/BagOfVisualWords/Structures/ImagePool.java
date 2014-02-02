@@ -43,6 +43,7 @@ public class ImagePool extends Structure implements Iterable{
     public ImagePool(GeneralStorer storer, String name, boolean create) throws Exception {
         this.name="collection."+name;
         this.origName=name;
+        
         if (!create && !storer.GetSet("ImageCollections").contains(name)) throw new Exception("Image collection not existing. Set up your descriptor first!");
         if (create && storer.GetSet("ImageCollections").contains(name)) throw new Exception("Image collection already exists!");
         if (create) storer.GetSet("ImageCollections").add(name);

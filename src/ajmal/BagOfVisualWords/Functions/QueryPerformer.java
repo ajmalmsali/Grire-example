@@ -82,7 +82,13 @@ public class QueryPerformer {
     }
 
     public TreeSet NewQuery(File img, int numOfResults) {
+    	final long it2 = System.currentTimeMillis();
         float[] vector = descriptor.extract(img);
+        final long it3 = System.currentTimeMillis();
+        
+        //System.out.println("[INFO] Feature Extraction took:				" + ((it3 - it2) / 1000.0) + " secs");
+        
+        
         int sign=(similarity.smallerTheBetter()?1:-1),counter=0;
         vector= scheme.formQueryVector(vector);
         Scores = new TreeSet<>();
@@ -106,6 +112,9 @@ public class QueryPerformer {
                 counter++;
             }
         }
+        final long it4 = System.currentTimeMillis();
+        //System.out.println("[INFO] Search took:				" + ((it4 - it3) / 1000.0) + " secs");
+        
         return Scores;
     }
 
@@ -135,7 +144,7 @@ public class QueryPerformer {
                         for (setItem item : results) {
                             try {
                                 name=new File(system.getCollection().getImage(item.id)).getName();
-                                ps.println(query +" 1 "+name.substring(0, name.lastIndexOf('.'))+" "+(++curr)+" "+sign*(item.score)+" "+ExperimentName);
+                                ps.println(query +" 1 "+name.substring(0, name.lastIndexOf('.'))+" "+(++curr)+" "+sign*(item.score));
                             } catch (Exception e) {
                                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                             }
@@ -168,6 +177,7 @@ public class QueryPerformer {
             public void run() {
                 PrintStream ps = new PrintStream(Results);
                 String name;
+                
                 TreeSet<setItem> results;
                 int curr,query=1,sign=(similarity.smallerTheBetter()?-1:1);
                 int size = querylist.size();
@@ -177,11 +187,17 @@ public class QueryPerformer {
                     for (setItem item : results){
                         try {
                             name=new File(system.getCollection().getImage(item.id)).getName();
-                            ps.println(query +" 1 "+name.substring(0, name.lastIndexOf('.'))+" "+(++curr)+" "+sign*item.score+" "+ExperimentName);
+                            System.out.println(name.substring(0, name.lastIndexOf('.')));
+                            ps.println("CC="+imagesPerQuery);
+                            ps.println(query +" 1 "+name.substring(0, name.lastIndexOf('.'))+" "+(++curr)+" "+sign*item.score+" "+ExperimentName+" inter");
                         } catch (Exception e) {
                             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                         }
-                        if (curr==imagesPerQuery) break;
+                        if (curr<=imagesPerQuery)
+                        {
+                        	ps.println("Breakpoint"+curr+" "+imagesPerQuery);
+                        	break;
+                        }
                     }
                     progressMade(query++, size);
                 }
