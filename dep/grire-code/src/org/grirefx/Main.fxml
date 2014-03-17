@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" disable="false" minHeight="600.0" minWidth="-1.0" prefHeight="636.0" prefWidth="915.0" styleClass="application" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.grirefx.MainController">
+  <children>
+    <MenuBar minHeight="22.0" prefHeight="22.0" prefWidth="915.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#newDatabaseMenuIssued" text="New Database" />
+            <MenuItem mnemonicParsing="false" onAction="#openDatabaseMenuIssued" text="Open Database" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#closedMenuIssued" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="View">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#showWorklistMenuIssued" text="Show Worklist" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Settings">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#pluginsMenuIssued" text="Plugins" />
+            <MenuItem mnemonicParsing="false" onAction="#reloadPluginsIssued" text="Reload Plugins" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane fx:id="everything" minHeight="523.0" prefHeight="523.0" prefWidth="915.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="113.0">
+      <children>
+        <ToolBar prefWidth="915.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <items>
+            <Label text="New:" />
+            <TextField fx:id="newNameTextField" alignment="CENTER_LEFT" onAction="#nameTextFieldTypedIn" prefWidth="200.0" promptText="Enter Name and Press Enter" />
+            <Button fx:id="newCollectionButton" cancelButton="false" disable="true" mnemonicParsing="false" onAction="#newCollectionIssued" text="Collection" />
+            <Button fx:id="newFeaturesButton" disable="true" mnemonicParsing="false" onAction="#newFeaturesIssued" text="Features" />
+            <Button fx:id="newCodebookButton" disable="true" mnemonicParsing="false" onAction="#newCodebookIssued" text="Codebook" />
+            <Button fx:id="newIndexButton" disable="true" mnemonicParsing="false" onAction="#newIndexIssued" text="Index" />
+          </items>
+        </ToolBar>
+        <SplitPane disable="false" dividerPositions="0.2267250821467689" focusTraversable="true" prefHeight="584.0" prefWidth="915.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+          <items>
+            <AnchorPane prefHeight="464.0" prefWidth="204.0">
+              <children>
+                <Accordion maxWidth="-1.0" prefHeight="454.0" prefWidth="204.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <panes>
+                    <TitledPane id="x1" fx:id="CollectionTitledPane" animated="false" expanded="false" text="Image Collections">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <ListView fx:id="collectionsListView" prefHeight="351.0" prefWidth="284.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </TitledPane>
+                    <TitledPane animated="false" expanded="false" text="Collection Features">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <ListView fx:id="featuresListView" prefHeight="230.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </TitledPane>
+                    <TitledPane fx:id="x3" animated="false" expanded="false" text="Codebooks">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <ListView fx:id="codebooksListView" prefHeight="230.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </TitledPane>
+                    <TitledPane fx:id="x2" animated="false" expanded="false" text="Indices">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <ListView fx:id="indicesListView" prefHeight="208.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </TitledPane>
+                    <TitledPane animated="false" expanded="false" text="General Data">
+                      <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                            <TreeView fx:id="generalDataTreeView" prefHeight="377.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </children>
+                        </AnchorPane>
+                      </content>
+                    </TitledPane>
+                  </panes>
+                </Accordion>
+                <ToggleButton fx:id="searchToggleButton" mnemonicParsing="false" onAction="#searchButtonToggled" prefWidth="160.0" text="Search" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="22.0" />
+              </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="589.0" prefWidth="703.0">
+              <children>
+                <AnchorPane id="collectionsPane" fx:id="collectionPane" prefHeight="500.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+                  <children>
+                    <ToolBar minHeight="32.0" prefHeight="32.0" prefWidth="705.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-1.0">
+                      <items>
+                        <Label text="Actions:" />
+                        <Button mnemonicParsing="false" onAction="#collectionAddImageIssued" text="Add Image" />
+                        <Button mnemonicParsing="false" onAction="#collectionAddFolderIssued" text="Add Folder" />
+                        <Button fx:id="collectionDeleteImageButton" disable="true" mnemonicParsing="false" onAction="#collectionDeleteImageIssued" text="Delete Image" />
+                        <Button mnemonicParsing="false" onAction="#collectionDeleteIssued" text="Delete Collection" />
+                        <Label text="Go to Id:" />
+                        <TextField onAction="#collectionGotoIssued" prefWidth="58.0" />
+                        <ProgressIndicator fx:id="imageCollectionIndicator" progress="-0.61" style="-fx-progress-color: gray;&#10;" visible="false" />
+                      </items>
+                    </ToolBar>
+                    <ListView fx:id="collectionNamesListView" prefHeight="247.0" prefWidth="692.0" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="53.0" />
+                    <ImageView fx:id="collectionImageView" fitHeight="233.0" fitWidth="310.66665636145547" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="2.67" />
+                    <Label text="Preview:" AnchorPane.bottomAnchor="266.0" AnchorPane.leftAnchor="5.0" />
+                    <Label layoutX="7.0" layoutY="33.0" text="Names:" />
+                  </children>
+                </AnchorPane>
+                <AnchorPane id="codebookPane" fx:id="featuresPane" minHeight="500.0" prefHeight="500.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="7.0">
+                  <children>
+                    <ToolBar maxHeight="32.0" minHeight="32.0" prefHeight="32.0" prefWidth="703.0" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <items>
+                        <Label text="Actions:" />
+                        <Button mnemonicParsing="false" text="Check" />
+                        <Button fx:id="featuresDeleteIdButton" disable="true" mnemonicParsing="false" onAction="#featuresDeleteIdIssued" text="Delete ID" />
+                        <Button mnemonicParsing="false" onAction="#featuresDeleteIssued" text="Delete Features" />
+                        <Label text="Go to Id:" />
+                        <TextField onAction="#featuresGotoIssued" prefWidth="65.0" />
+                        <ProgressIndicator id="imageCollectionIndicator" fx:id="featuresIndicator" progress="-0.95" rotate="0.0" style="-fx-progress-color: gray;" visible="false" />
+                      </items>
+                    </ToolBar>
+                    <Label text="Extracted from Image Collection:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="36.0" />
+                    <Label text="Extractor used:" AnchorPane.leftAnchor="107.0" AnchorPane.topAnchor="52.0" />
+                    <Label fx:id="extractorExtractedFromCollection" maxWidth="-Infinity" prefWidth="488.0" text="Label" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="52.0" />
+                    <ListView fx:id="featuresIdListView" orientation="HORIZONTAL" prefHeight="40.0" prefWidth="677.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="111.0" />
+                    <ListView fx:id="featuresFeaturesListView" prefHeight="363.0" prefWidth="678.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="196.0" />
+                    <Label text="Id:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="88.0" />
+                    <Label text="Features:" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="166.0" />
+                    <Hyperlink fx:id="featuresExtractedFromCollection" onAction="#goToCollection" prefWidth="486.0" text="Hyperlink" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="33.0" />
+                  </children>
+                </AnchorPane>
+                <AnchorPane id="featuresPane" fx:id="codebookPane" prefHeight="500.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+                  <children>
+                    <ToolBar minHeight="32.0" prefHeight="32.0" prefWidth="703.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <items>
+                        <Label text="Actions:" />
+                        <Button mnemonicParsing="false" onAction="#deleteCodebookIssued" text="Delete Codebook" />
+                        <ProgressIndicator fx:id="codebookIndicator" blendMode="SRC_OVER" disable="false" progress="-0.57" style="-fx-progress-color: gray;" visible="false" />
+                      </items>
+                    </ToolBar>
+                    <ListView fx:id="codebookWordsListView" prefHeight="482.0" prefWidth="703.0" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="103.0" />
+                    <Label layoutX="17.0" layoutY="38.0" text="Created From Features:" />
+                    <Label layoutX="95.0" layoutY="54.0" text="Method:" />
+                    <Label fx:id="codebookMethodLabel" layoutY="54.0" prefWidth="536.0" text="Label" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="12.0" />
+                    <Hyperlink fx:id="codebookCreatedFromLabel" onAction="#goToFeatures" prefWidth="536.0" text="Hyperlink" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="35.0" />
+                  </children>
+                </AnchorPane>
+                <AnchorPane fx:id="indexPane" prefHeight="500.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                  <children>
+                    <ToolBar minHeight="32.0" prefHeight="32.0" prefWidth="703.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                      <items>
+                        <Label text="Actions:" />
+                        <Button id="indexDeleteId" fx:id="indexDeleteIdButton" disable="true" mnemonicParsing="false" onAction="#indexDeleteIdIssued" text="Delete ID" underline="false" />
+                        <Button mnemonicParsing="false" onAction="#indexDeleteIssued" text="Delete Index" />
+                        <Label text="Go to Id:" />
+                        <TextField onAction="#indexGotoIssued" prefWidth="65.0" />
+                        <ProgressIndicator fx:id="indexIndicator" progress="-0.63" style="-fx-progress-color: gray;" visible="false" />
+                      </items>
+                    </ToolBar>
+                    <ListView fx:id="indexIdListView" orientation="HORIZONTAL" prefHeight="41.0" prefWidth="668.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="154.0" />
+                    <Label text="Id:" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="126.0" />
+                    <Label text="Histogram:" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="217.0" />
+                    <ListView fx:id="indexHistogramListView" orientation="HORIZONTAL" prefHeight="41.0" prefWidth="668.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="263.0" />
+                    <Label layoutX="17.0" layoutY="44.0" text="Created From Features:" />
+                    <Label layoutX="82.0" layoutY="60.0" text="Descriptor:" />
+                    <Label fx:id="indexDescriptorLabel" layoutX="158.0" layoutY="60.0" text="Label" />
+                    <Hyperlink fx:id="indexCreatedFeaturesLabel" onAction="#goToFeatures" prefWidth="531.0" text="Hyperlink" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="38.0" />
+                  </children>
+                </AnchorPane>
+                <AnchorPane id="generalDataPane" fx:id="histogramPane" prefHeight="491.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <Label layoutX="9.0" layoutY="33.0" text="X Values:" />
+                    <ListView fx:id="histogramXListView" prefHeight="411.0" prefWidth="100.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="66.0" />
+                    <Label layoutX="182.0" layoutY="33.0" text="Y Value:" />
+                    <TextField id="histogramXListView" fx:id="histogramYField" editable="false" layoutX="182.0" layoutY="66.0" prefWidth="200.0" />
+                    <ToolBar prefWidth="703.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                      <items>
+                        <Button mnemonicParsing="false" onAction="#histogramDeleteIssued" text="Delete Histogram" />
+                      </items>
+                    </ToolBar>
+                  </children>
+                </AnchorPane>
+                <AnchorPane id="searchPane" fx:id="systemConfigurationPane" minHeight="90.0" prefHeight="90.0" prefWidth="703.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <Label text="System Components:" AnchorPane.leftAnchor="9.0" AnchorPane.topAnchor="9.0" />
+                    <Label layoutX="61.0" layoutY="28.0" text="Image Collection:" />
+                    <Label layoutX="49.0" layoutY="44.0" text="Collection Features:" />
+                    <Label layoutX="95.0" layoutY="60.0" text="Descriptor:" />
+                    <Label layoutX="121.0" layoutY="76.0" text="Index:" />
+                    <Hyperlink fx:id="systemImageCollectionHyperlink" onAction="#goToCollection" prefWidth="413.0" text="Hyperlink" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="25.0" />
+                    <Hyperlink fx:id="systemCollectionFeaturesHyperlink" onAction="#goToFeatures" prefWidth="413.0" text="Hyperlink" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="41.0" />
+                    <Label fx:id="systemDescriptorLabel" prefWidth="410.0" text="Label" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="60.0" />
+                    <Hyperlink fx:id="systemIndexHyperlink" onAction="#goToIndex" prefWidth="413.0" text="Hyperlink" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="73.0" />
+                    <Hyperlink layoutX="137.0" layoutY="6.0" onAction="#ConfigureSystem" text="Change" />
+                  </children>
+                </AnchorPane>
+                <AnchorPane fx:id="queryConfigurationPane" prefHeight="54.0" prefWidth="703.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0">
+                  <children>
+                    <Label text="Query Configuration:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="-1.0" />
+                    <Label text="Wighting Scheme:" AnchorPane.leftAnchor="56.0" AnchorPane.topAnchor="18.0" />
+                    <Label text="Similarity Method:" AnchorPane.leftAnchor="56.0" AnchorPane.topAnchor="35.0" />
+                    <Hyperlink fx:id="queryConfigWeightingLabel" onAction="#ConfigureModel" prefWidth="413.0" text="Hyperlink" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="16.0" />
+                    <Hyperlink fx:id="queryConfigSimilarityLabel" onAction="#ConfigureSimilarity" prefWidth="413.0" text="Hyperlink" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="32.0" />
+                  </children>
+                </AnchorPane>
+                <AnchorPane id="SearchPane" fx:id="searchPane" prefHeight="342.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="149.0">
+                  <children>
+                    <TabPane prefHeight="342.0" prefWidth="703.0" tabClosingPolicy="UNAVAILABLE" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <tabs>
+                        <Tab text="Simple Search">
+                          <content>
+                            <AnchorPane id="" prefHeight="328.0" prefWidth="703.0" visible="true">
+                              <children>
+                                <Label layoutX="9.0" layoutY="6.0" text="Query Image:" />
+                                <TextField fx:id="queryImageTextField" prefWidth="565.0" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="31.0" />
+                                <Button mnemonicParsing="false" onAction="#queryBrowseImageIssued" text="Browse" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0" />
+                                <Button mnemonicParsing="false" onAction="#querySearchIssued" prefWidth="59.0" text="Search" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="61.0" />
+                                <Label layoutX="9.0" layoutY="82.0" text="Result List:" />
+                                <ListView fx:id="queryResultList" prefHeight="200.0" prefWidth="372.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="317.0" AnchorPane.topAnchor="114.0" />
+                                <Label text="Preview:" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="85.0" />
+                                <ImageView fx:id="queryImagePreview" fitHeight="181.0" fitWidth="241.3333425857314" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="34.0" />
+                              </children>
+                            </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab text="TREC Search">
+                          <content>
+                            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <children>
+                                <Label layoutX="9.0" layoutY="9.0" text="Output File:" />
+                                <TextField fx:id="queryTRECOutputTextField" prefWidth="577.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="35.0" />
+                                <Button mnemonicParsing="false" onAction="#queryBrowseTRECOutputIssued" text="Browse" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="35.0" />
+                                <Label layoutX="9.0" layoutY="71.0" text="Query Files:" />
+                                <ListView fx:id="queryTRECFilesListView" prefHeight="137.0" prefWidth="574.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="104.0" />
+                                <Button mnemonicParsing="false" onAction="#CreateTRECIssued" prefHeight="22.0" prefWidth="112.0" text="Create TREC File" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="7.0" />
+                                <ToolBar minWidth="78.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="92.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="104.0">
+                                  <items>
+                                    <Button mnemonicParsing="false" onAction="#addFileTRECIssued" prefWidth="75.0" text="Add" />
+                                    <Button mnemonicParsing="false" onAction="#addFromFileTRECIssued" text="From File..." />
+                                    <Button mnemonicParsing="false" onAction="#queryTRECRemoveIssued" prefWidth="75.0" text="Remove" />
+                                    <Button mnemonicParsing="false" onAction="#queryTRECClearIssued" prefWidth="75.0" text="Clear" />
+                                  </items>
+                                </ToolBar>
+                                <Label text="Results per query:" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="9.0" />
+                                <TextField fx:id="TRECResultsPerQueryTextField" prefWidth="56.0" text="-1" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="113.0" />
+                                <Label text="Experiment Name:" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="9.0" />
+                                <TextField fx:id="TRECExperimentNameTextField" prefWidth="403.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="187.0" />
+                              </children>
+                            </AnchorPane>
+                          </content>
+                        </Tab>
+                      </tabs>
+                    </TabPane>
+                  </children>
+                </AnchorPane>
+                <AnchorPane fx:id="generalMapsPane" prefHeight="491.0" prefWidth="703.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <GridPane prefHeight="462.0" prefWidth="703.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+                      <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                          <children>
+                            <Label text="Key Set:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="21.0" />
+                            <ListView fx:id="generalMapValueListView" prefHeight="366.0" prefWidth="329.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="52.0" />
+                          </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                          <children>
+                            <Label text="Value:" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="22.0" />
+                            <TextArea fx:id="generalMapValueTextArea" prefHeight="357.0" prefWidth="285.0" wrapText="true" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="54.0" />
+                          </children>
+                        </AnchorPane>
+                      </children>
+                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                    </GridPane>
+                    <ToolBar prefWidth="703.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                      <items>
+                        <Button mnemonicParsing="false" text="Button" />
+                      </items>
+                    </ToolBar>
+                  </children>
+                </AnchorPane>
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </children>
+    </AnchorPane>
+    <AnchorPane fx:id="currentlyWorkingPane" prefHeight="90.0" prefWidth="565.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="22.0">
+      <children>
+        <Label text="Current Task:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0" />
+        <Label fx:id="currentTaskLabel" prefWidth="460.0" text="" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0" />
+        <Label layoutX="31.0" layoutY="29.0" text="Progress:" />
+        <Label fx:id="progressMessageLabel" prefWidth="446.0" text="" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="29.0" />
+        <ProgressBar fx:id="progressBar" prefHeight="16.0" prefWidth="446.0" progress="0.0" AnchorPane.leftAnchor="91.0" AnchorPane.topAnchor="50.0" />
+      </children>
+    </AnchorPane>
+    <ImageView fitHeight="90.0" fitWidth="294.65754390272815" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="22.0">
+      <image>
+        <Image url="@logo.png" />
+      </image>
+    </ImageView>
+  </children>
+</AnchorPane>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cleangrire" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.apk"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.jopensurf.classpath">
+    <pathelement location="${basedir}/PluginPacks/BOVWBasicPack/Resources/JOpenSurf.jar"/>
+  </path>
+  
+  <path id="library.jspf.core-1.0.2.classpath">
+    <pathelement location="${basedir}/Resources/jspf.core-1.0.2.jar"/>
+  </path>
+  
+  <path id="library.junit:junit:4.11.classpath">
+    <pathelement location="${basedir}/Resources/hamcrest-core-1.3.jar"/>
+    <pathelement location="${basedir}/Resources/junit-4.11.jar"/>
+  </path>
+  
+  <path id="library.opencv-245.classpath">
+    <pathelement location="${basedir}/PluginPacks/OpenCVPack/Resources/opencv-245.jar"/>
+  </path>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_grire.xml"/>
+  
+  <import file="${basedir}/PluginPacks/WekaPack/module_wekapack.xml"/>
+  
+  <import file="${basedir}/PluginPacks/BOVWBasicPack/module_bovwbasicpack.xml"/>
+  
+  <import file="${basedir}/PluginPacks/CoViWoandSGONGPack/module_coviwoandsgongpack.xml"/>
+  
+  <import file="${basedir}/PluginPacks/OpenCVPack/module_opencvpack.xml"/>
+  
+  <import file="${basedir}/PluginPacks/TimersPack/module_timerspack.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.grire, clean.module.wekapack, clean.module.bovwbasicpack, clean.module.coviwoandsgongpack, clean.module.opencvpack, clean.module.timerspack" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.grire, compile.module.wekapack, compile.module.bovwbasicpack, compile.module.coviwoandsgongpack, compile.module.opencvpack, compile.module.timerspack" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.bovwbasicpack:jar" value="${basedir}/out/artifacts/BOVWBasicPack_jar"/>
+    <property name="artifact.output.coviwoandsgongpack:jar" value="${basedir}/out/artifacts/CoViWoandSGONGPack_jar"/>
+    <property name="artifact.output.grire:jar" value="${basedir}/out/artifacts/GRire_jar"/>
+    <property name="artifact.output.opencvpack:jar" value="${basedir}/out/artifacts/OpenCVPack_jar"/>
+    <property name="artifact.output.timerspack:jar" value="${basedir}/out/artifacts/TimersPack_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.BOVWBasicPack.jar" value="${artifacts.temp.dir}/BOVWBasicPack.jar"/>
+    <property name="temp.jar.path.CoViWoandSGONGPack.jar" value="${artifacts.temp.dir}/CoViWoandSGONGPack.jar"/>
+    <property name="temp.jar.path.GRire.jar" value="${artifacts.temp.dir}/GRire.jar"/>
+    <property name="temp.jar.path.OpenCVPack.jar" value="${artifacts.temp.dir}/OpenCVPack.jar"/>
+    <property name="temp.jar.path.TimersPack.jar" value="${artifacts.temp.dir}/TimersPack.jar"/>
+  </target>
+  
+  <target name="artifact.bovwbasicpack:jar" depends="init.artifacts, compile.module.bovwbasicpack" description="Build &#39;BOVWBasicPack:jar&#39; artifact">
+    <property name="artifact.temp.output.bovwbasicpack:jar" value="${artifacts.temp.dir}/BOVWBasicPack_jar"/>
+    <mkdir dir="${artifact.temp.output.bovwbasicpack:jar}"/>
+    <jar destfile="${temp.jar.path.BOVWBasicPack.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${bovwbasicpack.output.dir}"/>
+      <zipfileset src="${basedir}/PluginPacks/BOVWBasicPack/Resources/JOpenSurf.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.BOVWBasicPack.jar}" tofile="${artifact.temp.output.bovwbasicpack:jar}/BOVWBasicPack.jar"/>
+  </target>
+  
+  <target name="artifact.coviwoandsgongpack:jar" depends="init.artifacts, compile.module.coviwoandsgongpack" description="Build &#39;CoViWoandSGONGPack:jar&#39; artifact">
+    <property name="artifact.temp.output.coviwoandsgongpack:jar" value="${artifacts.temp.dir}/CoViWoandSGONGPack_jar"/>
+    <mkdir dir="${artifact.temp.output.coviwoandsgongpack:jar}"/>
+    <jar destfile="${temp.jar.path.CoViWoandSGONGPack.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${coviwoandsgongpack.output.dir}"/>
+      <zipfileset src="${basedir}/PluginPacks/BOVWBasicPack/Resources/JOpenSurf.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.CoViWoandSGONGPack.jar}" tofile="${artifact.temp.output.coviwoandsgongpack:jar}/CoViWoandSGONGPack.jar"/>
+  </target>
+  
+  <target name="artifact.grire:jar" depends="init.artifacts, compile.module.grire" description="Build &#39;GRire:jar&#39; artifact">
+    <property name="artifact.temp.output.grire:jar" value="${artifacts.temp.dir}/GRire_jar"/>
+    <mkdir dir="${artifact.temp.output.grire:jar}"/>
+    <jar destfile="${temp.jar.path.GRire.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${grire.output.dir}"/>
+      <zipfileset src="${basedir}/Resources/jspf.core-1.0.2.jar"/>
+      <zipfileset src="${basedir}/Resources/junit-4.11.jar"/>
+      <zipfileset src="${basedir}/Resources/hamcrest-core-1.3.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.GRire.jar}" tofile="${artifact.temp.output.grire:jar}/GRire.jar"/>
+  </target>
+  
+  <target name="artifact.opencvpack:jar" depends="init.artifacts, compile.module.opencvpack" description="Build &#39;OpenCVPack:jar&#39; artifact">
+    <property name="artifact.temp.output.opencvpack:jar" value="${artifacts.temp.dir}/OpenCVPack_jar"/>
+    <mkdir dir="${artifact.temp.output.opencvpack:jar}"/>
+    <jar destfile="${temp.jar.path.OpenCVPack.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${opencvpack.output.dir}"/>
+      <zipfileset src="${basedir}/PluginPacks/OpenCVPack/Resources/opencv-245.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.OpenCVPack.jar}" tofile="${artifact.temp.output.opencvpack:jar}/OpenCVPack.jar"/>
+  </target>
+  
+  <target name="artifact.timerspack:jar" depends="init.artifacts, compile.module.timerspack" description="Build &#39;TimersPack:jar&#39; artifact">
+    <property name="artifact.temp.output.timerspack:jar" value="${artifacts.temp.dir}/TimersPack_jar"/>
+    <mkdir dir="${artifact.temp.output.timerspack:jar}"/>
+    <jar destfile="${temp.jar.path.TimersPack.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${timerspack.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.TimersPack.jar}" tofile="${artifact.temp.output.timerspack:jar}/TimersPack.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.bovwbasicpack:jar, artifact.coviwoandsgongpack:jar, artifact.grire:jar, artifact.opencvpack:jar, artifact.timerspack:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.bovwbasicpack:jar}"/>
+    <copy todir="${artifact.output.bovwbasicpack:jar}">
+      <fileset dir="${artifact.temp.output.bovwbasicpack:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.coviwoandsgongpack:jar}"/>
+    <copy todir="${artifact.output.coviwoandsgongpack:jar}">
+      <fileset dir="${artifact.temp.output.coviwoandsgongpack:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.grire:jar}"/>
+    <copy todir="${artifact.output.grire:jar}">
+      <fileset dir="${artifact.temp.output.grire:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.opencvpack:jar}"/>
+    <copy todir="${artifact.output.opencvpack:jar}">
+      <fileset dir="${artifact.temp.output.opencvpack:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.timerspack:jar}"/>
+    <copy todir="${artifact.output.timerspack:jar}">
+      <fileset dir="${artifact.temp.output.timerspack:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

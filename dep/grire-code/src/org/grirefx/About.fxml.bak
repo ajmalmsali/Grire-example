@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <ImageView fitHeight="139.31715925468228" fitWidth="585.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Heracleitus.jpg" />
+      </image>
+    </ImageView>
+    <Label layoutX="14.0" layoutY="315.0" text="GRire is an opensource program distributed under the GPLv3 license." />
+    <Label layoutX="14.0" layoutY="331.0" text="Copyright © 2013. All Rights Reserved." />
+    <Label layoutX="14.0" layoutY="354.0" text="http://www.grire.net" />
+    <Label layoutX="14.0" layoutY="370.0" text="http://code.google.com/p/grire" />
+    <Label layoutX="9.0" layoutY="160.0" text="Contributors (and many thanks to):" />
+    <Label layoutX="34.0" layoutY="184.0" text="Chryssanthi Iakovidou  - Democritus University of Thrace - ciakovid@ee.duth.gr" />
+    <Label layoutX="34.0" layoutY="200.0" text="Savvas Chatzichristofis - Democritus University of Thrace - schatzic@ee.duth.gr" />
+    <Label layoutX="34.0" layoutY="216.0" text="Yannis Boutalis - Democritus University of Thrace - ybout@ee.duth.gr" />
+    <Label layoutX="13.0" layoutY="110.0" text="This project was developed by:" />
+    <Label layoutX="38.0" layoutY="132.0" text="Lazaros Tsochatzidis - Democritus University of Thrace - lazatsoc@ee.duth.gr" />
+  </children>
+</AnchorPane>

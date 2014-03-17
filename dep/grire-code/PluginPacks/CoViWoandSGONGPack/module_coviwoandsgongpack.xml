@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_coviwoandsgongpack" default="compile.module.coviwoandsgongpack">
+  <dirname property="module.coviwoandsgongpack.basedir" file="${ant.file.module_coviwoandsgongpack}"/>
+  
+  
+  <property name="compiler.args.coviwoandsgongpack" value="${compiler.args}"/>
+  
+  <property name="coviwoandsgongpack.output.dir" value="${module.coviwoandsgongpack.basedir}/../../out/production/CoViWoandSGONGPack"/>
+  <property name="coviwoandsgongpack.testoutput.dir" value="${module.coviwoandsgongpack.basedir}/../../out/test/CoViWoandSGONGPack"/>
+  
+  <path id="coviwoandsgongpack.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="coviwoandsgongpack.module.production.classpath">
+    <path refid="library.jopensurf.classpath"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="coviwoandsgongpack.runtime.production.module.classpath">
+    <pathelement location="${coviwoandsgongpack.output.dir}"/>
+    <path refid="library.jopensurf.classpath"/>
+    <path refid="grire.runtime.production.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="coviwoandsgongpack.module.classpath">
+    <pathelement location="${coviwoandsgongpack.output.dir}"/>
+    <path refid="library.jopensurf.classpath"/>
+    <pathelement location="${grire.testoutput.dir}"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="coviwoandsgongpack.runtime.module.classpath">
+    <pathelement location="${coviwoandsgongpack.testoutput.dir}"/>
+    <pathelement location="${coviwoandsgongpack.output.dir}"/>
+    <path refid="library.jopensurf.classpath"/>
+    <path refid="grire.runtime.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.coviwoandsgongpack">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.coviwoandsgongpack">
+    <patternset refid="excluded.from.module.coviwoandsgongpack"/>
+  </patternset>
+  
+  <path id="coviwoandsgongpack.module.sourcepath">
+    <dirset dir="${module.coviwoandsgongpack.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.coviwoandsgongpack" depends="compile.module.coviwoandsgongpack.production,compile.module.coviwoandsgongpack.tests" description="Compile module CoViWoandSGONGPack"/>
+  
+  <target name="compile.module.coviwoandsgongpack.production" depends="compile.module.grire" description="Compile module CoViWoandSGONGPack; production classes">
+    <mkdir dir="${coviwoandsgongpack.output.dir}"/>
+    <javac destdir="${coviwoandsgongpack.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.coviwoandsgongpack}"/>
+      <bootclasspath refid="coviwoandsgongpack.module.bootclasspath"/>
+      <classpath refid="coviwoandsgongpack.module.production.classpath"/>
+      <src refid="coviwoandsgongpack.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.coviwoandsgongpack"/>
+    </javac>
+    
+    <copy todir="${coviwoandsgongpack.output.dir}">
+      <fileset dir="${module.coviwoandsgongpack.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.coviwoandsgongpack.tests" depends="compile.module.coviwoandsgongpack.production" description="compile module CoViWoandSGONGPack; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.coviwoandsgongpack" description="cleanup module">
+    <delete dir="${coviwoandsgongpack.output.dir}"/>
+    <delete dir="${coviwoandsgongpack.testoutput.dir}"/>
+  </target>
+</project>

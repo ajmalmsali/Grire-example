@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_opencvpack" default="compile.module.opencvpack">
+  <dirname property="module.opencvpack.basedir" file="${ant.file.module_opencvpack}"/>
+  
+  
+  <property name="compiler.args.opencvpack" value="${compiler.args}"/>
+  
+  <property name="opencvpack.output.dir" value="${module.opencvpack.basedir}/../../out/production/OpenCVPack"/>
+  <property name="opencvpack.testoutput.dir" value="${module.opencvpack.basedir}/../../out/test/OpenCVPack"/>
+  
+  <path id="opencvpack.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="opencvpack.module.production.classpath">
+    <path refid="library.opencv-245.classpath"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="opencvpack.runtime.production.module.classpath">
+    <pathelement location="${opencvpack.output.dir}"/>
+    <path refid="library.opencv-245.classpath"/>
+    <path refid="grire.runtime.production.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="opencvpack.module.classpath">
+    <pathelement location="${opencvpack.output.dir}"/>
+    <path refid="library.opencv-245.classpath"/>
+    <pathelement location="${grire.testoutput.dir}"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="opencvpack.runtime.module.classpath">
+    <pathelement location="${opencvpack.testoutput.dir}"/>
+    <pathelement location="${opencvpack.output.dir}"/>
+    <path refid="library.opencv-245.classpath"/>
+    <path refid="grire.runtime.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.opencvpack">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.opencvpack">
+    <patternset refid="excluded.from.module.opencvpack"/>
+  </patternset>
+  
+  <path id="opencvpack.module.sourcepath">
+    <dirset dir="${module.opencvpack.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.opencvpack" depends="compile.module.opencvpack.production,compile.module.opencvpack.tests" description="Compile module OpenCVPack"/>
+  
+  <target name="compile.module.opencvpack.production" depends="compile.module.grire" description="Compile module OpenCVPack; production classes">
+    <mkdir dir="${opencvpack.output.dir}"/>
+    <javac destdir="${opencvpack.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.opencvpack}"/>
+      <bootclasspath refid="opencvpack.module.bootclasspath"/>
+      <classpath refid="opencvpack.module.production.classpath"/>
+      <src refid="opencvpack.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.opencvpack"/>
+    </javac>
+    
+    <copy todir="${opencvpack.output.dir}">
+      <fileset dir="${module.opencvpack.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.opencvpack.tests" depends="compile.module.opencvpack.production" description="compile module OpenCVPack; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.opencvpack" description="cleanup module">
+    <delete dir="${opencvpack.output.dir}"/>
+    <delete dir="${opencvpack.testoutput.dir}"/>
+  </target>
+</project>

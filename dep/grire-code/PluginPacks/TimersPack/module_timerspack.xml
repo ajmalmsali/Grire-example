@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_timerspack" default="compile.module.timerspack">
+  <dirname property="module.timerspack.basedir" file="${ant.file.module_timerspack}"/>
+  
+  
+  <property name="compiler.args.timerspack" value="${compiler.args}"/>
+  
+  <property name="timerspack.output.dir" value="${module.timerspack.basedir}/../../out/production/TimersPack"/>
+  <property name="timerspack.testoutput.dir" value="${module.timerspack.basedir}/../../out/test/TimersPack"/>
+  
+  <path id="timerspack.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="timerspack.module.production.classpath">
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="timerspack.runtime.production.module.classpath">
+    <pathelement location="${timerspack.output.dir}"/>
+    <path refid="grire.runtime.production.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="timerspack.module.classpath">
+    <pathelement location="${timerspack.output.dir}"/>
+    <pathelement location="${grire.testoutput.dir}"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="timerspack.runtime.module.classpath">
+    <pathelement location="${timerspack.testoutput.dir}"/>
+    <pathelement location="${timerspack.output.dir}"/>
+    <path refid="grire.runtime.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.timerspack">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.timerspack">
+    <patternset refid="excluded.from.module.timerspack"/>
+  </patternset>
+  
+  <path id="timerspack.module.sourcepath">
+    <dirset dir="${module.timerspack.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.timerspack" depends="compile.module.timerspack.production,compile.module.timerspack.tests" description="Compile module TimersPack"/>
+  
+  <target name="compile.module.timerspack.production" depends="compile.module.grire" description="Compile module TimersPack; production classes">
+    <mkdir dir="${timerspack.output.dir}"/>
+    <javac destdir="${timerspack.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.timerspack}"/>
+      <bootclasspath refid="timerspack.module.bootclasspath"/>
+      <classpath refid="timerspack.module.production.classpath"/>
+      <src refid="timerspack.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.timerspack"/>
+    </javac>
+    
+    <copy todir="${timerspack.output.dir}">
+      <fileset dir="${module.timerspack.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.timerspack.tests" depends="compile.module.timerspack.production" description="compile module TimersPack; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.timerspack" description="cleanup module">
+    <delete dir="${timerspack.output.dir}"/>
+    <delete dir="${timerspack.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_wekapack" default="compile.module.wekapack">
+  <dirname property="module.wekapack.basedir" file="${ant.file.module_wekapack}"/>
+  
+  
+  <property name="compiler.args.wekapack" value="${compiler.args}"/>
+  
+  <property name="wekapack.output.dir" value="${module.wekapack.basedir}/../../out/production/WekaPack"/>
+  <property name="wekapack.testoutput.dir" value="${module.wekapack.basedir}/../../out/test/WekaPack"/>
+  
+  <path id="wekapack.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="wekapack.module.production.classpath"/>
+  
+  <path id="wekapack.runtime.production.module.classpath">
+    <pathelement location="${wekapack.output.dir}"/>
+  </path>
+  
+  <path id="wekapack.module.classpath">
+    <pathelement location="${wekapack.output.dir}"/>
+  </path>
+  
+  <path id="wekapack.runtime.module.classpath">
+    <pathelement location="${wekapack.testoutput.dir}"/>
+    <pathelement location="${wekapack.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.wekapack">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.wekapack">
+    <patternset refid="excluded.from.module.wekapack"/>
+  </patternset>
+  
+  <path id="wekapack.module.sourcepath">
+    <dirset dir="${module.wekapack.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.wekapack" depends="compile.module.wekapack.production,compile.module.wekapack.tests" description="Compile module WekaPack"/>
+  
+  <target name="compile.module.wekapack.production" description="Compile module WekaPack; production classes">
+    <mkdir dir="${wekapack.output.dir}"/>
+    <javac destdir="${wekapack.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.wekapack}"/>
+      <bootclasspath refid="wekapack.module.bootclasspath"/>
+      <classpath refid="wekapack.module.production.classpath"/>
+      <src refid="wekapack.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.wekapack"/>
+    </javac>
+    
+    <copy todir="${wekapack.output.dir}">
+      <fileset dir="${module.wekapack.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.wekapack.tests" depends="compile.module.wekapack.production" description="compile module WekaPack; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.wekapack" description="cleanup module">
+    <delete dir="${wekapack.output.dir}"/>
+    <delete dir="${wekapack.testoutput.dir}"/>
+  </target>
+</project>

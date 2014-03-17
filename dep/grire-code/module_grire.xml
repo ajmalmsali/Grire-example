@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_grire" default="compile.module.grire">
+  <dirname property="module.grire.basedir" file="${ant.file.module_grire}"/>
+  
+  
+  <property name="compiler.args.grire" value="${compiler.args}"/>
+  
+  <property name="grire.output.dir" value="${module.grire.basedir}/out/production/GRire"/>
+  <property name="grire.testoutput.dir" value="${module.grire.basedir}/out/test/GRire"/>
+  
+  <path id="grire.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="grire.module.production.classpath">
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+    <path refid="library.junit:junit:4.11.classpath"/>
+  </path>
+  
+  <path id="grire.runtime.production.module.classpath">
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+    <path refid="library.junit:junit:4.11.classpath"/>
+  </path>
+  
+  <path id="grire.module.classpath">
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+    <path refid="library.junit:junit:4.11.classpath"/>
+  </path>
+  
+  <path id="grire.runtime.module.classpath">
+    <pathelement location="${grire.testoutput.dir}"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+    <path refid="library.junit:junit:4.11.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.grire">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.grire">
+    <patternset refid="excluded.from.module.grire"/>
+  </patternset>
+  
+  <path id="grire.module.sourcepath">
+    <dirset dir="${module.grire.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.grire" depends="compile.module.grire.production,compile.module.grire.tests" description="Compile module GRire"/>
+  
+  <target name="compile.module.grire.production" description="Compile module GRire; production classes">
+    <mkdir dir="${grire.output.dir}"/>
+    <javac destdir="${grire.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.grire}"/>
+      <bootclasspath refid="grire.module.bootclasspath"/>
+      <classpath refid="grire.module.production.classpath"/>
+      <src refid="grire.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.grire"/>
+    </javac>
+    
+    <copy todir="${grire.output.dir}">
+      <fileset dir="${module.grire.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.grire.tests" depends="compile.module.grire.production" description="compile module GRire; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.grire" description="cleanup module">
+    <delete dir="${grire.output.dir}"/>
+    <delete dir="${grire.testoutput.dir}"/>
+  </target>
+</project>

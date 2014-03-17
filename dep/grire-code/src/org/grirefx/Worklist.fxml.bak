@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" disable="false" minHeight="404.0" prefHeight="404.0" prefWidth="426.00019999999495" xmlns:fx="http://javafx.com/fxml" fx:controller="org.grirefx.WorklistController">
+  <children>
+    <ListView fx:id="tasksListView" layoutX="14.0" layoutY="35.0" prefHeight="247.0" prefWidth="325.0" />
+    <Label layoutX="2.0" layoutY="11.0" text="Tasks Remaining:" />
+    <Label layoutX="2.0" layoutY="295.0" text="Current Task:" />
+    <ProgressBar id="bar" fx:id="progressBar" layoutX="37.0" layoutY="374.0" prefHeight="16.0" prefWidth="233.0" progress="0.0" />
+    <Label layoutX="23.0" layoutY="321.0" text="Name:" />
+    <Label layoutX="23.0" layoutY="347.0" text="Progress:" />
+    <ToolBar layoutX="339.0" layoutY="35.0" orientation="VERTICAL" prefHeight="247.0">
+      <items>
+        <ToggleButton fx:id="auto" mnemonicParsing="false" selected="true" text="AutoPick" />
+        <Button fx:id="nextButton" disable="true" mnemonicParsing="false" onAction="#nextIssued" prefWidth="67.0" text="Next" />
+        <Button fx:id="upButton" disable="true" mnemonicParsing="false" prefWidth="67.0" text="Up" />
+        <Button fx:id="downButton" disable="true" mnemonicParsing="false" prefWidth="67.0" text="Down" />
+        <Button fx:id="removeButton" disable="true" mnemonicParsing="false" onAction="#removeIssued" prefWidth="67.0" text="Remove" />
+      </items>
+    </ToolBar>
+    <Button layoutX="345.0" layoutY="369.0" mnemonicParsing="false" prefWidth="67.0" text="Close" />
+    <Label fx:id="nameLabel" layoutX="65.0" layoutY="321.0" prefWidth="351.0" text="" />
+    <Label fx:id="progressLabel" layoutX="79.0" layoutY="347.0" text="" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_bovwbasicpack" default="compile.module.bovwbasicpack">
+  <dirname property="module.bovwbasicpack.basedir" file="${ant.file.module_bovwbasicpack}"/>
+  
+  
+  <property name="compiler.args.bovwbasicpack" value="${compiler.args}"/>
+  
+  <property name="bovwbasicpack.output.dir" value="${module.bovwbasicpack.basedir}/../../out/production/BOVWBasicPack"/>
+  <property name="bovwbasicpack.testoutput.dir" value="${module.bovwbasicpack.basedir}/../../out/test/BOVWBasicPack"/>
+  
+  <path id="bovwbasicpack.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="bovwbasicpack.module.production.classpath">
+    <path refid="library.jopensurf.classpath"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="bovwbasicpack.runtime.production.module.classpath">
+    <pathelement location="${bovwbasicpack.output.dir}"/>
+    <path refid="library.jopensurf.classpath"/>
+    <path refid="grire.runtime.production.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="bovwbasicpack.module.classpath">
+    <pathelement location="${bovwbasicpack.output.dir}"/>
+    <path refid="library.jopensurf.classpath"/>
+    <pathelement location="${grire.testoutput.dir}"/>
+    <pathelement location="${grire.output.dir}"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  <path id="bovwbasicpack.runtime.module.classpath">
+    <pathelement location="${bovwbasicpack.testoutput.dir}"/>
+    <pathelement location="${bovwbasicpack.output.dir}"/>
+    <path refid="library.jopensurf.classpath"/>
+    <path refid="grire.runtime.module.classpath"/>
+    <path refid="library.jspf.core-1.0.2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.bovwbasicpack">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.bovwbasicpack">
+    <patternset refid="excluded.from.module.bovwbasicpack"/>
+  </patternset>
+  
+  <path id="bovwbasicpack.module.sourcepath">
+    <dirset dir="${module.bovwbasicpack.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.bovwbasicpack" depends="compile.module.bovwbasicpack.production,compile.module.bovwbasicpack.tests" description="Compile module BOVWBasicPack"/>
+  
+  <target name="compile.module.bovwbasicpack.production" depends="compile.module.grire" description="Compile module BOVWBasicPack; production classes">
+    <mkdir dir="${bovwbasicpack.output.dir}"/>
+    <javac destdir="${bovwbasicpack.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.bovwbasicpack}"/>
+      <bootclasspath refid="bovwbasicpack.module.bootclasspath"/>
+      <classpath refid="bovwbasicpack.module.production.classpath"/>
+      <src refid="bovwbasicpack.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.bovwbasicpack"/>
+    </javac>
+    
+    <copy todir="${bovwbasicpack.output.dir}">
+      <fileset dir="${module.bovwbasicpack.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.bovwbasicpack.tests" depends="compile.module.bovwbasicpack.production" description="compile module BOVWBasicPack; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.bovwbasicpack" description="cleanup module">
+    <delete dir="${bovwbasicpack.output.dir}"/>
+    <delete dir="${bovwbasicpack.testoutput.dir}"/>
+  </target>
+</project>

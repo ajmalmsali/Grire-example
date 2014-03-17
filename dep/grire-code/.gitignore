@@ -1,0 +1,14 @@
+javadoc/
+out/
+opencv_java245.dll
+plugins
+.idea/
+GRire.iml
+PluginPacks/BOVWBasicPack/BOVWBasicPack.iml
+PluginPacks/CoViWoandSGONGPack/CoViWoandSGONGPack.iml
+PluginPacks/DebugPack/DebugPack.iml
+PluginPacks/OpenCVPack/OpenCVPack.iml
+PluginPacks/TimersPack/TimersPack.iml
+PluginPacks/WekaPack/WekaPack.iml
+opencv_java246.dll
+libopencv_java246.so
