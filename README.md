@@ -19,7 +19,6 @@ Searching for an Image
 
 java -jar ajmg6.jar search ImagePoolName /home/username/YourGrireDb/db /home/username/YourSourceFile.jpg
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/e93e6b4ee7dbb19138c69e3f1a52305e "githalytics.com")](http://githalytics.com/ajmalmsali/Grire-example)
 
 
 
